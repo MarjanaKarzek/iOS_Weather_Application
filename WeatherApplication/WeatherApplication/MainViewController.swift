@@ -142,19 +142,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         locationManager.stopUpdatingLocation()
         locationManager.stopUpdatingHeading()
         geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
-            // Place details
             var placeMark: CLPlacemark!
             placeMark = placemarks?[0]
-            
-            // City
+            //print("\(self.location.coordinate.latitude) \(self.location.coordinate.longitude)")
             if let city = placeMark.addressDictionary!["City"] as? String {
-                print(city)
+                //print(city)
                 self.currentLocationLabel.setTitle(city, for: UIControlState.normal)
             }else if let homelocationValue:String = self.defaults.string(forKey: "WeatherApp_homelocation") {
                 self.currentLocationLabel.setTitle(homelocationValue, for: UIControlState.normal)
                 if(homelocationValue == ""){
                     self.currentLocationLabel.setTitle("London", for: UIControlState.normal)
-                    self.location = CLLocation(latitude: -0.1337,longitude: 51.50998)
+                    self.location = CLLocation(latitude: 51.50998,longitude: -0.1337)
                 }
             }
         })
