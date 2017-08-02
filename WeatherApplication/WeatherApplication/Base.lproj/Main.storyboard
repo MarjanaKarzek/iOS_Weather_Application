@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="currentDate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vvg-lZ-MAV">
-                                <rect key="frame" x="109" y="72" width="156" height="31"/>
+                                <rect key="frame" x="16" y="72" width="343" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
@@ -134,6 +134,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="9KB-mM-HdN" id="Pwd-H0-rIZ"/>
+                        <outlet property="currentDateLabel" destination="Vvg-lZ-MAV" id="hle-hU-XGj"/>
+                        <outlet property="currentLocationLabel" destination="EpT-nv-IGb" id="SAj-Db-05m"/>
+                        <outlet property="weatherExplanationLabel" destination="9P1-gO-Hrr" id="e9K-HG-GfY"/>
+                        <outlet property="welcomeTextLabel" destination="5dW-1n-cp1" id="JDc-gC-gH6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

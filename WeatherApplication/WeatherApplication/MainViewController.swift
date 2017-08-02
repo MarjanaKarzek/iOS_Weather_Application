@@ -19,15 +19,48 @@ private var testtexts = ["I am reading to you","I am reading to you","I am readi
 class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var currentDateLabel: UILabel!
+    @IBOutlet weak var currentLocationLabel: UIButton!
+    @IBOutlet weak var welcomeTextLabel: UILabel!
+    @IBOutlet weak var weatherExplanationLabel: UILabel!
     
     let speechSynthesizer = AVSpeechSynthesizer()
+    var defaults = UserDefaults()
+    
+    var selectedPreviewAmount = 10
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        setupText()
+
     }
 
+    func setupText(){
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            defaults = delegate.defaults
+        }
+        if let usernameValue:String = defaults.string(forKey: "WeatherApp_username") {
+            welcomeTextLabel.text = "Hello " + usernameValue + ", "
+        }else{
+            welcomeTextLabel.text = "Wellcome, "
+        }
+        if let previewAmountValue:String = defaults.string(forKey: "WeatherApp_previewAmount") {
+            weatherExplanationLabel.text = "This is the weather for the next " + previewAmountValue + " days: "
+            selectedPreviewAmount = Int(selectedPreviewAmount)
+        }else{
+            weatherExplanationLabel.text = "This is the weather for the next 10 days: "
+        }
+        
+        let date = Date()
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: date)
+        let month = calendar.component(.month, from: date)
+        let year = calendar.component(.year, from: date)
+        currentDateLabel.text = "\(year)-\(month)-\(day)"
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

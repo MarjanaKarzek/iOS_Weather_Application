@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController{
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapTypeController: UISegmentedControl!

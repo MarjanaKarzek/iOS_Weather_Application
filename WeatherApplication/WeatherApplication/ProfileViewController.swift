@@ -14,11 +14,14 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var homelocationField: UITextField!
     @IBOutlet weak var previewAmountField: UITextField!
-    
-    let defaults:UserDefaults = UserDefaults.standard
+    var defaults = UserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            defaults = delegate.defaults
+        }
+        
         if let usernameValue:String = defaults.string(forKey: "WeatherApp_username") {
             usernameField.text = usernameValue
         }
