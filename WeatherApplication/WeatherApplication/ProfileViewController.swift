@@ -9,9 +9,27 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var homelocationField: UITextField!
+    @IBOutlet weak var previewAmountField: UITextField!
+    
+    let defaults:UserDefaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let usernameValue:String = defaults.string(forKey: "WeatherApp_username") {
+            usernameField.text = usernameValue
+        }
+        
+        if let homelocationValue:String = defaults.string(forKey: "WeatherApp_homelocation"){
+            homelocationField.text = homelocationValue
+        }
+        
+        if let previewAmountValue:String = defaults.string(forKey: "WeatherApp_previewAmount"){
+            previewAmountField.text = previewAmountValue
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -20,6 +38,20 @@ class ProfileViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func editingUsernameEnd(_ sender: Any) {
+        defaults.set(usernameField.text, forKey: "WeatherApp_username")
+    }
+    
+    @IBAction func editingHomelocationEnd(_ sender: Any) {
+        defaults.set(homelocationField.text, forKey: "WeatherApp_homelocation")
+    }
+    
+    @IBAction func editingPreviewAmountEnd(_ sender: Any) {
+        defaults.set(previewAmountField.text, forKey: "WeatherApp_previewAmount")
+    }
+    
+    
     
 
     /*

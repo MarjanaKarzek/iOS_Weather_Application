@@ -179,6 +179,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editingUsernameEnd:" destination="u5Q-qt-Uvm" eventType="editingDidEnd" id="hJZ-3h-Y6j"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="add your homelocation here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dc5-AZ-eF5">
                                 <rect key="frame" x="139" y="175" width="220" height="30"/>
@@ -186,6 +189,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editingHomelocationEnd:" destination="u5Q-qt-Uvm" eventType="editingDidEnd" id="1mk-0Z-zw0"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Preview Days: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKs-Eb-NaZ">
                                 <rect key="frame" x="16" y="226" width="112" height="21"/>
@@ -200,10 +206,18 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editingPreviewAmountEnd:" destination="u5Q-qt-Uvm" eventType="editingDidEnd" id="3yM-jb-rFX"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="homelocationField" destination="Dc5-AZ-eF5" id="Gtd-pe-zkK"/>
+                        <outlet property="previewAmountField" destination="pxa-sP-rYw" id="o25-3h-y7e"/>
+                        <outlet property="usernameField" destination="vO5-4R-0zU" id="loB-RZ-y1U"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZg-PH-mLL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
