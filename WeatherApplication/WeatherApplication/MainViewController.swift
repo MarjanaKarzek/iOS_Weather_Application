@@ -9,6 +9,7 @@
 import UIKit
 import Social
 import AVFoundation
+import CoreLocation
 
 private let reuseIdentifier = "weatherCell"
 private var testimages = ["testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg"]
@@ -16,7 +17,7 @@ private var testlabels = ["12-15","13-16","12-15","13-16","12-15","13-16","12-15
 private var testdates = ["02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017"]
 private var testtexts = ["I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you"]
 
-class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate{
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var currentDateLabel: UILabel!
@@ -26,6 +27,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     let speechSynthesizer = AVSpeechSynthesizer()
     var defaults = UserDefaults()
+    let locationManager = CLLocationManager()
+    var location = CLLocation()
+    let geoCoder = CLGeocoder()
     
     var selectedPreviewAmount = 10
     
@@ -59,6 +63,8 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let month = calendar.component(.month, from: date)
         let year = calendar.component(.year, from: date)
         currentDateLabel.text = "\(year)-\(month)-\(day)"
+        
+        determineCurrentLocation()
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,15 +73,20 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "showMapView"{
+            let controller = segue.destination as! MapViewController
+            controller.location = location
+        }
     }
-    */
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -116,5 +127,40 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             twitterSheet.add(UIImage(named: imagetitle))
         }
         self.present(twitterSheet, animated: true, completion: nil)
+    }
+    
+    func determineCurrentLocation(){
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        location = locations[0]
+        locationManager.stopUpdatingLocation()
+        locationManager.stopUpdatingHeading()
+        geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+            // Place details
+            var placeMark: CLPlacemark!
+            placeMark = placemarks?[0]
+            
+            // City
+            if let city = placeMark.addressDictionary!["City"] as? String {
+                print(city)
+                self.currentLocationLabel.setTitle(city, for: UIControlState.normal)
+            }else if let homelocationValue:String = self.defaults.string(forKey: "WeatherApp_homelocation") {
+                self.currentLocationLabel.setTitle(homelocationValue, for: UIControlState.normal)
+                if(homelocationValue == ""){
+                    self.currentLocationLabel.setTitle("London", for: UIControlState.normal)
+                    self.location = CLLocation(latitude: -0.1337,longitude: 51.50998)
+                }
+            }
+        })
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error \(error)")
     }
 }

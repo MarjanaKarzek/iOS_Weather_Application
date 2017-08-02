@@ -8,20 +8,23 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class MapViewController: UIViewController{
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapTypeController: UISegmentedControl!
     
-    let testLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
     let regionRadius: CLLocationDistance = 1000
+    //let locationManager = CLLocationManager()
+    var location = CLLocation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-        centerMapOnLocation(location: testLocation)
+        centerMapOnLocation(location: location)
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,8 +33,7 @@ class MapViewController: UIViewController{
     }
     
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-                                                                  regionRadius * 2.0, regionRadius * 2.0)
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
