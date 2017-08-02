@@ -8,15 +8,19 @@
 
 import UIKit
 import Social
+import AVFoundation
 
 private let reuseIdentifier = "weatherCell"
 private var testimages = ["testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg"]
 private var testlabels = ["12-15","13-16","12-15","13-16","12-15","13-16","12-15","13-16","12-15","13-16"]
 private var testdates = ["02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017"]
+private var testtexts = ["I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you"]
 
 class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    let speechSynthesizer = AVSpeechSynthesizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +60,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cell.weatherDate.text = testdates[indexPath.row]
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let speechUtterance = AVSpeechUtterance(string: testtexts[indexPath.row])
+        speechSynthesizer.speak(speechUtterance)
     }
     
     @IBAction func facbookButtonPushed(sender: UIButton){
