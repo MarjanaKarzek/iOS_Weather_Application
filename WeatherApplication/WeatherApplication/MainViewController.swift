@@ -26,19 +26,24 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var weatherExplanationLabel: UILabel!
     
     let speechSynthesizer = AVSpeechSynthesizer()
+    
     var defaults = UserDefaults()
+    
     let locationManager = CLLocationManager()
     var location = CLLocation()
     let geoCoder = CLGeocoder()
     
     var selectedPreviewAmount = 10
+    var weatherData = [WeatherCard]()
+    
+    let weatherReceiver = WeatherReceiver()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         setupText()
-
+        weatherReceiver.callWeatherdata(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, forecast: selectedPreviewAmount)
     }
 
     func setupText(){
