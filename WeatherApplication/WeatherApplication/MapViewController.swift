@@ -10,19 +10,22 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class MapViewController: UIViewController{
-
+class MapViewController: UIViewController, UISearchBarDelegate{
+    
+    var defaults = UserDefaults()
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapTypeController: UISegmentedControl!
     
     let regionRadius: CLLocationDistance = 1000
-    //let locationManager = CLLocationManager()
     var location = CLLocation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        if let delegate = UIApplication.shared.delegate as? AppDelegate {
+            defaults = delegate.defaults
+        }
         centerMapOnLocation(location: location)
 
     }
@@ -53,7 +56,66 @@ class MapViewController: UIViewController{
             break
         }
     }
+    
+    @IBAction func searchButton(_ sender: Any) {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        present(searchController, animated: true, completion: nil)
+    }
 
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        //ignore user interaction
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        //set up search view
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        
+        self.view.addSubview(activityIndicator)
+        
+        //hide search bar
+        searchBar.resignFirstResponder()
+        dismiss(animated: true, completion: nil)
+        
+        //create search request
+        let searchRequest = MKLocalSearchRequest()
+        searchRequest.naturalLanguageQuery = searchBar.text
+        
+        let activeSearch = MKLocalSearch(request: searchRequest)
+        activeSearch.start { (response, error) in
+            activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+            if let result = response{
+                //remove annotation
+                let annotations = self.mapView.annotations
+                self.mapView.removeAnnotations(annotations)
+                
+                //get data
+                let latitude = result.boundingRegion.center.latitude
+                let longitude = result.boundingRegion.center.longitude
+                
+                //create new annotation based on fetched data
+                let annotation = MKPointAnnotation()
+                annotation.title = searchBar.text
+                annotation.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+                self.mapView.addAnnotation(annotation)
+                self.centerMapOnLocation(location: CLLocation(latitude: latitude, longitude: longitude))
+            }else {
+                print("Search went wrong")
+                //add user info here
+            }
+        }
+    }
+    
+    @IBAction func setAsLocation(_ sender: Any) {
+        let annotations = self.mapView.annotations
+        defaults.set(annotations[0].coordinate.latitude, forKey: "WeatherApp_selectedLatitude")
+        defaults.set(annotations[0].coordinate.longitude, forKey: "WeatherApp_selectedLongitude")
+    }
+    
     /*
     // MARK: - Navigation
 

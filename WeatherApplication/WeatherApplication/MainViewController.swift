@@ -45,18 +45,21 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
             defaults = delegate.defaults
         }
+        
+        //display text
         if let usernameValue:String = defaults.string(forKey: "WeatherApp_username") {
             welcomeTextLabel.text = "Hello " + usernameValue + ", "
         }else{
             welcomeTextLabel.text = "Wellcome, "
         }
-        if let previewAmountValue:String = defaults.string(forKey: "WeatherApp_previewAmount") {
+        if let previewAmountValue:String = defaults.string(forKey: "WeatherApp_previewAmount"){
             weatherExplanationLabel.text = "This is the weather for the next " + previewAmountValue + " days: "
             selectedPreviewAmount = Int(selectedPreviewAmount)
         }else{
             weatherExplanationLabel.text = "This is the weather for the next 10 days: "
         }
         
+        //display date
         let date = Date()
         let calendar = Calendar.current
         let day = calendar.component(.day, from: date)
@@ -64,7 +67,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let year = calendar.component(.year, from: date)
         currentDateLabel.text = "\(year)-\(month)-\(day)"
         
-        determineCurrentLocation()
+        //get location
+        let selectedLatitude = defaults.double(forKey: "WeatherApp_selectedLatitude")
+        let selectedLongitude = defaults.double(forKey: "WeatherApp_selectedLongitude")
+        if(selectedLatitude != 0 && selectedLongitude != 0){
+            location = CLLocation(latitude: selectedLatitude, longitude: selectedLongitude)
+            print("\(selectedLatitude) \(selectedLongitude)")
+            setButtonTextToCity()
+        }else{
+            print("no selected location")
+            determineCurrentLocation()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -141,12 +154,16 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         location = locations[0]
         locationManager.stopUpdatingLocation()
         locationManager.stopUpdatingHeading()
+        setButtonTextToCity()
+    }
+    
+    func setButtonTextToCity(){
         geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
             var placeMark: CLPlacemark!
             placeMark = placemarks?[0]
-            //print("\(self.location.coordinate.latitude) \(self.location.coordinate.longitude)")
+            print("\(self.location.coordinate.latitude) \(self.location.coordinate.longitude)")
             if let city = placeMark.addressDictionary!["City"] as? String {
-                //print(city)
+                print(city)
                 self.currentLocationLabel.setTitle(city, for: UIControlState.normal)
             }else if let homelocationValue:String = self.defaults.string(forKey: "WeatherApp_homelocation") {
                 self.currentLocationLabel.setTitle(homelocationValue, for: UIControlState.normal)
@@ -160,5 +177,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error \(error)")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.viewDidLoad()
     }
 }
