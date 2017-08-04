@@ -40,10 +40,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        setupText()
-        weatherReceiver.callWeatherdata(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, forecast: selectedPreviewAmount)
     }
 
     func setupText(){
@@ -114,21 +110,27 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return testimages.count
+        return weatherData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)as! WeatherCollectionViewCell
         // Configure the cell
-        cell.weatherImage.image = UIImage(named: testimages[indexPath.row])
-        cell.weatherTemperature.text = testlabels[indexPath.row]
-        cell.weatherDate.text = testdates[indexPath.row]
+        //cell.weatherImage.image = UIImage(named: testimages[indexPath.row])
+        //cell.weatherTemperature.text = testlabels[indexPath.row]
+        //cell.weatherDate.text = testdates[indexPath.row]
+        print("loading Data")
+        
+        let weatherid = weatherData[indexPath.row].weather.id
+        cell.weatherImage.image = UIImage(named: weatherReceiver.getWeatherIcon(id: weatherid))
+        cell.weatherTemperature.text = weatherData[indexPath.row].temperature
+        cell.weatherDate.text = weatherData[indexPath.row].date
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let speechUtterance = AVSpeechUtterance(string: testtexts[indexPath.row])
+        let speechUtterance = AVSpeechUtterance(string: weatherData[indexPath.row].text)
         speechSynthesizer.speak(speechUtterance)
     }
     
@@ -190,6 +192,20 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.viewDidLoad()
+        // Do any additional setup after loading the view.
+        setupText()
+        
+        //get weather information
+        weatherReceiver.callWeatherdata(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, forecast: selectedPreviewAmount){
+            () in
+            self.weatherReceiver.extractData(){
+                ()
+                self.weatherData = self.weatherReceiver.weatherCards
+                print("data completed \(self.weatherData.count) data objects received")
+                print("reload data")
+                //dispatch reload call to main thread
+                DispatchQueue.main.async(execute: { self.collectionView.reloadData() })
+            }
+        }
     }
 }
