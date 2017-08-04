@@ -116,6 +116,8 @@ class MapViewController: UIViewController, UISearchBarDelegate{
         defaults.set(annotations[0].coordinate.longitude, forKey: "WeatherApp_selectedLongitude")
     }
     
+    
+    
     /*
     // MARK: - Navigation
 

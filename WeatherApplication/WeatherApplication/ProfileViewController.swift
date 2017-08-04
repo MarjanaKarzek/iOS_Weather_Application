@@ -22,16 +22,17 @@ class ProfileViewController: UIViewController {
             defaults = delegate.defaults
         }
         
-        if let usernameValue:String = defaults.string(forKey: "WeatherApp_username") {
-            usernameField.text = usernameValue
-        }
+        let usernameValue = defaults.string(forKey: "WeatherApp_username")
+        usernameField.text = usernameValue
         
-        if let homelocationValue:String = defaults.string(forKey: "WeatherApp_homelocation"){
-            homelocationField.text = homelocationValue
-        }
+        let homelocationValue = defaults.string(forKey: "WeatherApp_homelocation")
+        homelocationField.text = homelocationValue
         
-        if let previewAmountValue:String = defaults.string(forKey: "WeatherApp_previewAmount"){
-            previewAmountField.text = previewAmountValue
+        let previewAmountValue = defaults.integer(forKey: "WeatherApp_previewAmount")
+        if previewAmountValue != 0{
+            previewAmountField.text = "\(previewAmountValue)"
+        }else{
+            previewAmountField.text = "10"
         }
 
         // Do any additional setup after loading the view.
@@ -52,6 +53,9 @@ class ProfileViewController: UIViewController {
     
     @IBAction func editingPreviewAmountEnd(_ sender: Any) {
         defaults.set(previewAmountField.text, forKey: "WeatherApp_previewAmount")
+        if previewAmountField.text == "" {
+            previewAmountField.text = "10"
+        }
     }
     
     

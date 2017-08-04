@@ -47,17 +47,20 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         //display text
-        if let usernameValue:String = defaults.string(forKey: "WeatherApp_username") {
-            welcomeTextLabel.text = "Hello " + usernameValue + ", "
-        }else{
+        if let usernameValue = defaults.string(forKey: "WeatherApp_username"){
+            if(usernameValue == ""){
+                welcomeTextLabel.text = "Wellcome, "
+            }else{
+                welcomeTextLabel.text = "Hello \(usernameValue), "
+            }
+        }else {
             welcomeTextLabel.text = "Wellcome, "
         }
-        if let previewAmountValue:String = defaults.string(forKey: "WeatherApp_previewAmount"){
-            weatherExplanationLabel.text = "This is the weather for the next " + previewAmountValue + " days: "
-            selectedPreviewAmount = Int(selectedPreviewAmount)
-        }else{
-            weatherExplanationLabel.text = "This is the weather for the next 10 days: "
+        let previewAmountValue = defaults.integer(forKey: "WeatherApp_previewAmount")
+        if previewAmountValue != 0 {
+            selectedPreviewAmount = previewAmountValue
         }
+        weatherExplanationLabel.text = "This is the weather for the next \(selectedPreviewAmount) days: "
         
         //display date
         let date = Date()
@@ -161,13 +164,15 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         geoCoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
             var placeMark: CLPlacemark!
             placeMark = placemarks?[0]
-            print("\(self.location.coordinate.latitude) \(self.location.coordinate.longitude)")
+            //print("\(self.location.coordinate.latitude) \(self.location.coordinate.longitude)")
             if let city = placeMark.addressDictionary!["City"] as? String {
-                print(city)
+                //print(city)
                 self.currentLocationLabel.setTitle(city, for: UIControlState.normal)
-            }else if let homelocationValue:String = self.defaults.string(forKey: "WeatherApp_homelocation") {
-                self.currentLocationLabel.setTitle(homelocationValue, for: UIControlState.normal)
-                if(homelocationValue == ""){
+            }else {
+                let homelocationValue = self.defaults.string(forKey: "WeatherApp_homelocation")
+                if homelocationValue != "" {
+                    self.currentLocationLabel.setTitle(homelocationValue, for: UIControlState.normal)
+                }else{
                     self.currentLocationLabel.setTitle("London", for: UIControlState.normal)
                     self.location = CLLocation(latitude: 51.50998,longitude: -0.1337)
                 }
