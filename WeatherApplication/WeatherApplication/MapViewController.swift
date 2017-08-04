@@ -104,8 +104,7 @@ class MapViewController: UIViewController, UISearchBarDelegate{
                 self.mapView.addAnnotation(annotation)
                 self.centerMapOnLocation(location: CLLocation(latitude: latitude, longitude: longitude))
             }else {
-                print("Search went wrong")
-                //add user info here
+                self.showToast(message: "no results found")
             }
         }
     }
@@ -114,9 +113,26 @@ class MapViewController: UIViewController, UISearchBarDelegate{
         let annotations = self.mapView.annotations
         defaults.set(annotations[0].coordinate.latitude, forKey: "WeatherApp_selectedLatitude")
         defaults.set(annotations[0].coordinate.longitude, forKey: "WeatherApp_selectedLongitude")
+        showToast(message: "location selected")
     }
     
-    
+    func showToast(message: String) {
+        let toast = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+        toast.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toast.textColor = UIColor.white
+        toast.textAlignment = .center;
+        //toast.font = UIFont(name: "Montserrat-Light", size: 12.0)
+        toast.text = message
+        toast.alpha = 1.0
+        toast.layer.cornerRadius = 10;
+        toast.clipsToBounds  =  true
+        self.view.addSubview(toast)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toast.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toast.removeFromSuperview()
+        })
+    }
     
     /*
     // MARK: - Navigation
