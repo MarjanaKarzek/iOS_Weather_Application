@@ -200,4 +200,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         }
     }
+
+    @IBAction func reloadLocation(sender: UIButton){
+        currentLocationLabel.setTitle("loading...", for: UIControlState.normal)
+        determineCurrentLocation()
+    }
 }
