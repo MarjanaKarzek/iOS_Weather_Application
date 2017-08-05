@@ -19,7 +19,12 @@ struct WeatherCard {
     var clouds: Int
     
     var temperature: String {
-        return "\(temp.min-273) - \(temp.max-273)°C"
+        if temp.min == temp.max {
+            return "\(temp.min-273)°C"
+        }
+        else{
+            return "\(temp.min-273) - \(temp.max-273)°C"
+        }
     }
     var date: String {
         let date = Date(timeIntervalSince1970: TimeInterval(dt))
