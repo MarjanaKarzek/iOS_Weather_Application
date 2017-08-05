@@ -69,7 +69,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let day = calendar.component(.day, from: date)
         let month = calendar.component(.month, from: date)
         let year = calendar.component(.year, from: date)
-        currentDateLabel.text = "\(year)-\(month)-\(day)"
+        currentDateLabel.text = "\(day)-\(month)-\(year)"
         
         //get location
         let selectedLatitude = defaults.double(forKey: "WeatherApp_selectedLatitude")
