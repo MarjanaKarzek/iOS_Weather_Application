@@ -47,6 +47,19 @@ struct WeatherCard {
             return "The Weather on the \(day)\(dayExtention) of \(month) will be \(weather.description) with \(temp.min-273) to \(temp.max-273) degrees."
         }
     }
+    var summaryText: String {
+        let date = Date(timeIntervalSince1970: TimeInterval(dt))
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: date)
+        let dayExtention = getDayExtention(number: day)
+        let month = getMonth(number: calendar.component(.month, from: date))
+        if temp.min == temp.max {
+            return "\(day)\(dayExtention) \(month) - \(weather.description), \(temp.min-273)°C."
+        }
+        else {
+            return "\(day)\(dayExtention) \(month) - \(weather.description), \(temp.min-273) to \(temp.max-273)°C."
+        }
+    }
     
     init(){
         self.dt = 0

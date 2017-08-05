@@ -12,10 +12,6 @@ import AVFoundation
 import CoreLocation
 
 private let reuseIdentifier = "weatherCell"
-private var testimages = ["testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg","testimage.jpg"]
-private var testlabels = ["12-15","13-16","12-15","13-16","12-15","13-16","12-15","13-16","12-15","13-16"]
-private var testdates = ["02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017","02.08.2017"]
-private var testtexts = ["I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you","I am reading to you"]
 
 class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate{
     
@@ -129,18 +125,26 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @IBAction func facbookButtonPushed(sender: UIButton){
         let facebookSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-        facebookSheet.setInitialText("This is the weather for the next 10 days")
-        for imagetitle in testimages{
-            facebookSheet.add(UIImage(named: imagetitle))
+        var initalText = "This is the weather for the next \(selectedPreviewAmount) days: "
+        for card in weatherData{
+            initalText.append("\n\(card.summaryText)")
+        }
+        facebookSheet.setInitialText(initalText)
+        for card in weatherData{
+            let image = weatherReceiver.getWeatherIcon(id: card.weather.id)
+            facebookSheet.add(UIImage(named: image))
         }
         self.present(facebookSheet, animated:true, completion:nil)
     }
     
     @IBAction func twitterButtonPushed(sender: UIButton) {
         let twitterSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-        twitterSheet.setInitialText("This is the weather for the next 10 days")
-        for imagetitle in testimages{
-            twitterSheet.add(UIImage(named: imagetitle))
+        let initalText = "This is the weather for the next \(selectedPreviewAmount) days "
+        // no summary text because twitter only provides 160 chars
+        twitterSheet.setInitialText(initalText)
+        for card in weatherData{
+            let image = weatherReceiver.getWeatherIcon(id: card.weather.id)
+            twitterSheet.add(UIImage(named: image))
         }
         self.present(twitterSheet, animated: true, completion: nil)
     }
