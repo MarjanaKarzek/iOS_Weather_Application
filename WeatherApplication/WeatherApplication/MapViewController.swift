@@ -111,9 +111,13 @@ class MapViewController: UIViewController, UISearchBarDelegate{
     
     @IBAction func setAsLocation(_ sender: Any) {
         let annotations = self.mapView.annotations
-        defaults.set(annotations[0].coordinate.latitude, forKey: "WeatherApp_selectedLatitude")
-        defaults.set(annotations[0].coordinate.longitude, forKey: "WeatherApp_selectedLongitude")
-        showToast(message: "location selected")
+        if annotations.count < 1 {
+            showToast(message: "no location chosen")
+        } else {
+            defaults.set(annotations[0].coordinate.latitude, forKey: "WeatherApp_selectedLatitude")
+            defaults.set(annotations[0].coordinate.longitude, forKey: "WeatherApp_selectedLongitude")
+            showToast(message: "location selected")
+        }
     }
     
     func showToast(message: String) {

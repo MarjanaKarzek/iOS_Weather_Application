@@ -30,10 +30,10 @@ class WeatherReceiver{
                         print("error on getting data from url")
                     } else {
                         if let jsondata = data{
-                            print("data received")
+                            //print("data received")
                             do {
                                 self.json = try JSONSerialization.jsonObject(with: jsondata) as! [String: Any]
-                                print("json found")
+                                //print("json found")
                                 //self.extractData()
                                 completed()
                             } catch {
@@ -127,7 +127,7 @@ class WeatherReceiver{
                 }
                 card.weather = (id,main,description,icon)
             }
-            card.toString()
+            //card.toString()
             weatherCards.append(card)
         }
         completed()

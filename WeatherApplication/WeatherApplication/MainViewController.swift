@@ -89,15 +89,12 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         // Dispose of any resources that can be recreated.
     }
     
-
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        
         if segue.identifier == "showMapView"{
             let controller = segue.destination as! MapViewController
             controller.location = location
@@ -116,10 +113,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)as! WeatherCollectionViewCell
         // Configure the cell
-        //cell.weatherImage.image = UIImage(named: testimages[indexPath.row])
-        //cell.weatherTemperature.text = testlabels[indexPath.row]
-        //cell.weatherDate.text = testdates[indexPath.row]
-        print("loading Data")
         
         let weatherid = weatherData[indexPath.row].weather.id
         cell.weatherImage.image = UIImage(named: weatherReceiver.getWeatherIcon(id: weatherid))
@@ -202,7 +195,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 ()
                 self.weatherData = self.weatherReceiver.weatherCards
                 print("data completed \(self.weatherData.count) data objects received")
-                print("reload data")
                 //dispatch reload call to main thread
                 DispatchQueue.main.async(execute: { self.collectionView.reloadData() })
             }
