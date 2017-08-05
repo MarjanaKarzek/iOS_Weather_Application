@@ -115,6 +115,7 @@ class MapViewController: UIViewController, UISearchBarDelegate{
     
     @IBAction func setAsLocation(_ sender: Any) {
         let annotations = self.mapView.annotations
+        print(annotations)
         if annotations.count < 1 {
             showToast(message: "no location chosen")
         } else if annotations.count > 1{

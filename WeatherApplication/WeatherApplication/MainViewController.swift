@@ -74,6 +74,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             location = CLLocation(latitude: selectedLatitude, longitude: selectedLongitude)
             print("\(selectedLatitude) \(selectedLongitude)")
             setButtonTextToCity()
+            getWeatherInformation()
         }else{
             print("no selected location")
             determineCurrentLocation()
@@ -82,15 +83,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         if segue.identifier == "showMapView"{
             let controller = segue.destination as! MapViewController
             controller.location = location
@@ -162,6 +157,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         locationManager.stopUpdatingLocation()
         locationManager.stopUpdatingHeading()
         setButtonTextToCity()
+        getWeatherInformation()
     }
     
     func setButtonTextToCity(){
@@ -192,19 +188,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewWillAppear(_ animated: Bool) {
         // Do any additional setup after loading the view.
         setupText()
-        
-        //get weather information
-        weatherReceiver.callWeatherdata(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, forecast: selectedPreviewAmount){
-            () in
-            self.weatherReceiver.extractData(){
-                ()
-                self.weatherData = self.weatherReceiver.weatherCards
-                print("data completed \(self.weatherData.count) data objects received")
-                print("for location \(self.location.coordinate.latitude) \(self.location.coordinate.longitude)")
-                //dispatch reload call to main thread
-                DispatchQueue.main.async(execute: { self.collectionView.reloadData() })
-            }
-        }
     }
 
     @IBAction func reloadLocation(sender: UIButton){
@@ -212,7 +195,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         defaults.set(0, forKey: "WeatherApp_selectedLatitude")
         defaults.set(0, forKey: "WeatherApp_selectedLongitude")
         determineCurrentLocation()
-        getWeatherInformation()
     }
     
     func getWeatherInformation(){
