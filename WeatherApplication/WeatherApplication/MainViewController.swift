@@ -181,6 +181,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     self.location = CLLocation(latitude: 51.50998,longitude: -0.1337)
                 }
             }
+            DispatchQueue.main.async(execute: { self.collectionView.reloadData() })
         })
     }
     
@@ -199,6 +200,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 ()
                 self.weatherData = self.weatherReceiver.weatherCards
                 print("data completed \(self.weatherData.count) data objects received")
+                print("for location \(self.location.coordinate.latitude) \(self.location.coordinate.longitude)")
                 //dispatch reload call to main thread
                 DispatchQueue.main.async(execute: { self.collectionView.reloadData() })
             }
@@ -207,6 +209,23 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     @IBAction func reloadLocation(sender: UIButton){
         currentLocationLabel.setTitle("loading...", for: UIControlState.normal)
+        defaults.set(0, forKey: "WeatherApp_selectedLatitude")
+        defaults.set(0, forKey: "WeatherApp_selectedLongitude")
         determineCurrentLocation()
+        getWeatherInformation()
+    }
+    
+    func getWeatherInformation(){
+        weatherReceiver.callWeatherdata(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, forecast: selectedPreviewAmount){
+            () in
+            self.weatherReceiver.extractData(){
+                ()
+                self.weatherData = self.weatherReceiver.weatherCards
+                print("data completed \(self.weatherData.count) data objects received")
+                print("for location \(self.location.coordinate.latitude) \(self.location.coordinate.longitude)")
+                //dispatch reload call to main thread
+                DispatchQueue.main.async(execute: { self.collectionView.reloadData() })
+            }
+        }
     }
 }

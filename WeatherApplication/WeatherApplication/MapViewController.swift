@@ -18,6 +18,7 @@ class MapViewController: UIViewController, UISearchBarDelegate{
     
     let regionRadius: CLLocationDistance = 1000
     var location = CLLocation()
+    var lastSetLocation = CLLocation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,11 +98,14 @@ class MapViewController: UIViewController, UISearchBarDelegate{
                 let latitude = result.boundingRegion.center.latitude
                 let longitude = result.boundingRegion.center.longitude
                 
+                self.lastSetLocation = CLLocation(latitude: result.boundingRegion.center.latitude, longitude: result.boundingRegion.center.longitude)
+                
                 //create new annotation based on fetched data
                 let annotation = MKPointAnnotation()
                 annotation.title = searchBar.text
                 annotation.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
                 self.mapView.addAnnotation(annotation)
+                
                 self.centerMapOnLocation(location: CLLocation(latitude: latitude, longitude: longitude))
             }else {
                 self.showToast(message: "no results found")
@@ -113,6 +117,10 @@ class MapViewController: UIViewController, UISearchBarDelegate{
         let annotations = self.mapView.annotations
         if annotations.count < 1 {
             showToast(message: "no location chosen")
+        } else if annotations.count > 1{
+            defaults.set(lastSetLocation.coordinate.latitude, forKey: "WeatherApp_selectedLatitude")
+            defaults.set(lastSetLocation.coordinate.longitude, forKey: "WeatherApp_selectedLongitude")
+            showToast(message: "location selected")
         } else {
             defaults.set(annotations[0].coordinate.latitude, forKey: "WeatherApp_selectedLatitude")
             defaults.set(annotations[0].coordinate.longitude, forKey: "WeatherApp_selectedLongitude")
