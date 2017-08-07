@@ -141,7 +141,7 @@ class WeatherReceiver{
                 //thunder
                 imageSource = "001lighticons-26.png"
                 break
-            case 4:
+            case 3,4:
                 //drizzle
                 imageSource = "001lighticons-17.png"
                 break
