@@ -20,6 +20,8 @@ class DBManager{
     private let name = Expression<String?>("name")
     private let homelocation = Expression<String?>("homelocation")
     private let previewAmount = Expression<Int64>("previewAmount")
+    private let selectedLatitude = Expression<Double?>("selectedLatitude")
+    private let selectedLongitude = Expression<Double?>("selectedLongitude")
     
     private init(){
         let path = NSSearchPathForDirectoriesInDomains(
@@ -36,6 +38,7 @@ class DBManager{
     func createUserTable(){
         if let database = db {
             do{
+                //try database.run(tableUser.drop(ifExists: true))
                 try database.run(tableUser.create(ifNotExists: true) { table in
                     table.column(id, primaryKey: true)
                     table.column(username, unique: true)
@@ -43,7 +46,8 @@ class DBManager{
                     table.column(name)
                     table.column(homelocation)
                     table.column(previewAmount, check: previewAmount>0 && previewAmount<17, defaultValue: 10)
-                    
+                    table.column(selectedLatitude)
+                    table.column(selectedLongitude)
                 })
             } catch {
                 print("Unable to create user table")
@@ -94,7 +98,9 @@ class DBManager{
                                 password: user[password],
                                 name: user[name] ?? "",
                                 homelocation: user[homelocation] ?? "",
-                                previewAmount: user[previewAmount])
+                                previewAmount: user[previewAmount],
+                                selectedLatitude: user[selectedLatitude] ?? 0,
+                                selectedLongitude: user[selectedLongitude] ?? 0)
                 }
             } else {
                 print("Unable to open database")
@@ -118,6 +124,22 @@ class DBManager{
         } catch {
         }
         return 0
+    }
+    
+    func showUserHomelocationBy(idInput: Int64) -> String {
+        do {
+            let query = tableUser.select(homelocation)
+                .filter(id == idInput)
+            if let database = db {
+                for user in try database.prepare(query){
+                    return user[homelocation] ?? ""
+                }
+            } else {
+                print("Unable to open database")
+            }
+        } catch {
+        }
+        return ""
     }
     
     func updateUserNameBy(idInput: Int64, nameInput: String){
@@ -158,7 +180,18 @@ class DBManager{
             print("Update failed")
         }
     }
-    
+    func updateUserSelectedLocationBy(idInput: Int64, latitudeInput: Double, longitudeInput: Double) {
+        do {
+            let user = tableUser.filter(id == idInput)
+            if let database = db {
+                try database.run(user.update(selectedLatitude <- latitudeInput, selectedLongitude <- longitudeInput))
+            } else {
+                print("Unable to open database")
+            }
+        } catch {
+            print("Update failed")
+        }
+    }
 }
 /*
  Swift Type     SQLite Type

@@ -20,6 +20,7 @@ class MapViewController: UIViewController, UISearchBarDelegate{
     var location = CLLocation()
     var lastSetLocation = CLLocation()
     var homelocation = ""
+    var userID:Int64 = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +28,12 @@ class MapViewController: UIViewController, UISearchBarDelegate{
         // Do any additional setup after loading the view.
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
             defaults = delegate.defaults
+            userID = delegate.loggedOnUserID
+            homelocation = DBManager.shared.showUserHomelocationBy(idInput: userID)
         }
         centerMapOnLocation(location: location)
-        homelocation = defaults.string(forKey: "WeatherApp_homelocation") ?? ""
+        //homelocation = defaults.string(forKey: "WeatherApp_homelocation") ?? ""
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -132,12 +136,16 @@ class MapViewController: UIViewController, UISearchBarDelegate{
         if annotations.count < 1 {
             showToast(message: "no location chosen")
         } else if annotations.count > 1{
-            defaults.set(lastSetLocation.coordinate.latitude, forKey: "WeatherApp_selectedLatitude")
-            defaults.set(lastSetLocation.coordinate.longitude, forKey: "WeatherApp_selectedLongitude")
+            //defaults.set(lastSetLocation.coordinate.latitude, forKey: "WeatherApp_selectedLatitude")
+            //defaults.set(lastSetLocation.coordinate.longitude, forKey: "WeatherApp_selectedLongitude")
+            
+            DBManager.shared.updateUserSelectedLocationBy(idInput: userID, latitudeInput: lastSetLocation.coordinate.latitude, longitudeInput: lastSetLocation.coordinate.longitude)
             showToast(message: "location selected")
         } else {
-            defaults.set(annotations[0].coordinate.latitude, forKey: "WeatherApp_selectedLatitude")
-            defaults.set(annotations[0].coordinate.longitude, forKey: "WeatherApp_selectedLongitude")
+            //defaults.set(annotations[0].coordinate.latitude, forKey: "WeatherApp_selectedLatitude")
+            //defaults.set(annotations[0].coordinate.longitude, forKey: "WeatherApp_selectedLongitude")
+            
+            DBManager.shared.updateUserSelectedLocationBy(idInput: userID, latitudeInput: annotations[0].coordinate.latitude, longitudeInput: annotations[0].coordinate.longitude)
             showToast(message: "location selected")
         }
     }
