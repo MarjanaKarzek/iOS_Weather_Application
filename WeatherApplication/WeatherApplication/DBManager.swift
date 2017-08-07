@@ -38,7 +38,6 @@ class DBManager{
     func createUserTable(){
         if let database = db {
             do{
-                //try database.run(tableUser.drop(ifExists: true))
                 try database.run(tableUser.create(ifNotExists: true) { table in
                     table.column(id, primaryKey: true)
                     table.column(username, unique: true)

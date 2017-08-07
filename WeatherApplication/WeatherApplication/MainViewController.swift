@@ -24,6 +24,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     let speechSynthesizer = AVSpeechSynthesizer()
     
     var defaults = UserDefaults()
+    var userID:Int64 = 0
     
     let locationManager = CLLocationManager()
     var location = CLLocation()
@@ -41,10 +42,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func setupText(){
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
             defaults = delegate.defaults
+            userID = delegate.loggedOnUserID
         }
         
         //display text
-        if let usernameValue = defaults.string(forKey: "WeatherApp_username"){
+        /*if let usernameValue = defaults.string(forKey: "WeatherApp_username"){
             if(usernameValue == ""){
                 welcomeTextLabel.text = "Wellcome, "
             }else{
@@ -57,6 +59,23 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if previewAmountValue != 0 {
             selectedPreviewAmount = previewAmountValue
         }
+        weatherExplanationLabel.text = "This is the weather for the next \(selectedPreviewAmount) days: "*/
+        var selectedLatitude = Double.infinity
+        var selectedLongitude = Double.infinity
+        
+        if let user = DBManager.shared.showUserBy(idInput: userID) {
+            if user.name == "" {
+                welcomeTextLabel.text = "Wellcome, "
+            }else{
+                welcomeTextLabel.text = "Hello \(user.name), "
+            }
+            selectedPreviewAmount = Int(user.previewAmount)
+            
+            if user.selectedLatitude != 0 && user.selectedLongitude != 0{
+                selectedLatitude = user.selectedLatitude
+                selectedLongitude = user.selectedLongitude
+            }
+        }
         weatherExplanationLabel.text = "This is the weather for the next \(selectedPreviewAmount) days: "
         
         //display date
@@ -68,9 +87,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         currentDateLabel.text = "\(day)-\(month)-\(year)"
         
         //get location
-        let selectedLatitude = defaults.double(forKey: "WeatherApp_selectedLatitude")
-        let selectedLongitude = defaults.double(forKey: "WeatherApp_selectedLongitude")
-        if(selectedLatitude != 0 && selectedLongitude != 0){
+        //let selectedLatitude = defaults.double(forKey: "WeatherApp_selectedLatitude")
+        //let selectedLongitude = defaults.double(forKey: "WeatherApp_selectedLongitude")
+        
+        //if(selectedLatitude != 0 && selectedLongitude != 0){
+        if selectedLatitude < Double.infinity && selectedLongitude < Double.infinity {
             location = CLLocation(latitude: selectedLatitude, longitude: selectedLongitude)
             print("\(selectedLatitude) \(selectedLongitude)")
             setButtonTextToCity()
@@ -91,7 +112,6 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             controller.location = location
         }
     }
-    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -193,8 +213,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     @IBAction func reloadLocation(sender: UIButton){
         currentLocationLabel.setTitle("loading...", for: UIControlState.normal)
-        defaults.set(0, forKey: "WeatherApp_selectedLatitude")
-        defaults.set(0, forKey: "WeatherApp_selectedLongitude")
+        //defaults.set(0, forKey: "WeatherApp_selectedLatitude")
+        //defaults.set(0, forKey: "WeatherApp_selectedLongitude")
+        DBManager.shared.updateUserSelectedLocationBy(idInput: userID, latitudeInput: 0, longitudeInput: 0)
         determineCurrentLocation()
     }
     
