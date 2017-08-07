@@ -157,6 +157,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="passwordCheckEditingBegin:" destination="ppc-hT-uUU" eventType="editingDidBegin" id="wYB-2T-dxg"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter your account information:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BcN-M5-NNx">
                                 <rect key="frame" x="16" y="182" width="343" height="21"/>
@@ -173,6 +176,7 @@
                     <connections>
                         <outlet property="passwordCheckField" destination="djP-2D-ICN" id="N8C-Vs-pK9"/>
                         <outlet property="passwordField" destination="tRG-WB-2Mn" id="38j-V6-vLP"/>
+                        <outlet property="signUpButton" destination="TU4-Uq-6MR" id="PVG-np-QxI"/>
                         <outlet property="usernameField" destination="Gvi-9K-LlM" id="dqo-5R-zER"/>
                     </connections>
                 </viewController>

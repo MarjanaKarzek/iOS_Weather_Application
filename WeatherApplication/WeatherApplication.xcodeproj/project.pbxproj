@@ -23,6 +23,7 @@
 		D6CD61D01F386F060002AF7B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD61CF1F386F060002AF7B /* SignUpViewController.swift */; };
 		D6CD61D21F38797F0002AF7B /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD61D11F38797F0002AF7B /* DBManager.swift */; };
 		D6CD61F11F387F870002AF7B /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6CD61DE1F387E1C0002AF7B /* SQLite.framework */; };
+		D6CD61F31F38AFD60002AF7B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD61F21F38AFD60002AF7B /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,7 @@
 		D6CD61CF1F386F060002AF7B /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		D6CD61D11F38797F0002AF7B /* DBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
 		D6CD61D31F387E1C0002AF7B /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
+		D6CD61F21F38AFD60002AF7B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 				D69935741F3468DD00DF99D7 /* WeatherCard.swift */,
 				D69935761F346BC600DF99D7 /* WeatherReceiver.swift */,
 				D6CD61D11F38797F0002AF7B /* DBManager.swift */,
+				D6CD61F21F38AFD60002AF7B /* User.swift */,
 			);
 			path = WeatherApplication;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				D6CD61D01F386F060002AF7B /* SignUpViewController.swift in Sources */,
 				D69935751F3468DD00DF99D7 /* WeatherCard.swift in Sources */,
 				D6AA40101F32184600F86545 /* MapViewController.swift in Sources */,
+				D6CD61F31F38AFD60002AF7B /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

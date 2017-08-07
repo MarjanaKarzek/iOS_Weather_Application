@@ -36,29 +36,16 @@ class LoginViewController: UIViewController {
             signInButton.isEnabled = true
         }
     }
-    
-    func showToast(message: String) {
-        let toast = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
-        toast.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toast.textColor = UIColor.white
-        toast.textAlignment = .center;
-        toast.text = message
-        toast.alpha = 1.0
-        toast.layer.cornerRadius = 10;
-        toast.clipsToBounds  =  true
-        self.view.addSubview(toast)
-        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-            toast.alpha = 0.0
-        }, completion: {(isCompleted) in
-            toast.removeFromSuperview()
-        })
-    }
 
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "showHome" {
             if usernameField.text != "" && passwordField.text != "" {
                 let password = DBManager.shared.showPasswordFor(usernameInput: usernameField.text ?? "")
                 if password == passwordField.text {
+                    let userID = DBManager.shared.showUserIDFor(usernameInput: usernameField.text ?? "")
+                    if let delegate = UIApplication.shared.delegate as? AppDelegate {
+                        delegate.loggedOnUserID = userID
+                    }
                     return true
                 } else {
                     showToast(message: "incorrect")
@@ -85,4 +72,20 @@ class LoginViewController: UIViewController {
     }
     */
 
+    func showToast(message: String) {
+        let toast = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+        toast.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toast.textColor = UIColor.white
+        toast.textAlignment = .center;
+        toast.text = message
+        toast.alpha = 1.0
+        toast.layer.cornerRadius = 10;
+        toast.clipsToBounds  =  true
+        self.view.addSubview(toast)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toast.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toast.removeFromSuperview()
+        })
+    }
 }

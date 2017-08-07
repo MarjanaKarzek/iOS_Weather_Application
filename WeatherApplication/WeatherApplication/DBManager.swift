@@ -83,6 +83,82 @@ class DBManager{
         return nil
     }
     
+    func showUserBy(idInput: Int64) -> User?{
+        do {
+            let query = tableUser.select(tableUser[*])
+                .filter(id == idInput)
+            if let database = db {
+                for user in try database.prepare(query){
+                    return User(id: user[id],
+                                username: user[username],
+                                password: user[password],
+                                name: user[name] ?? "",
+                                homelocation: user[homelocation] ?? "",
+                                previewAmount: user[previewAmount])
+                }
+            } else {
+                print("Unable to open database")
+            }
+        } catch {
+        }
+        return nil
+    }
+    
+    func showUserIDFor(usernameInput: String) -> Int64 {
+        do {
+            let query = tableUser.select(id)
+                .filter(username == usernameInput)
+            if let database = db {
+                for user in try database.prepare(query){
+                    return user[id]
+                }
+            } else {
+                print("Unable to open database")
+            }
+        } catch {
+        }
+        return 0
+    }
+    
+    func updateUserNameBy(idInput: Int64, nameInput: String){
+        do {
+            let user = tableUser.filter(id == idInput)
+            if let database = db {
+                try database.run(user.update(name <- nameInput))
+            } else {
+                print("Unable to open database")
+            }
+        } catch {
+            print("Update failed")
+        }
+    }
+    
+    func updateUserHomelocationBy(idInput: Int64, homelocationInput: String){
+        do {
+            let user = tableUser.filter(id == idInput)
+            if let database = db {
+                try database.run(user.update(homelocation <- homelocationInput))
+            } else {
+                print("Unable to open database")
+            }
+        } catch {
+            print("Update failed")
+        }
+    }
+    
+    func updateUserPreviewAmountBy(idInput: Int64, previewAmountInput: Int64){
+        do {
+            let user = tableUser.filter(id == idInput)
+            if let database = db {
+                try database.run(user.update(previewAmount <- previewAmountInput))
+            } else {
+                print("Unable to open database")
+            }
+        } catch {
+            print("Update failed")
+        }
+    }
+    
 }
 /*
  Swift Type     SQLite Type
