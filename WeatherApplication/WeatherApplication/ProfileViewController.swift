@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var homelocationField: UITextField!
     @IBOutlet weak var previewAmountField: UITextField!
     
-    var defaults = UserDefaults()
+    //var defaults = UserDefaults()
     var userID:Int64 = 0
 
     override func viewDidLoad() {
@@ -22,7 +22,7 @@ class ProfileViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
-            defaults = delegate.defaults
+            //defaults = delegate.defaults
             userID = delegate.loggedOnUserID
         }
         

@@ -13,7 +13,7 @@ import CoreLocation
 class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
-    let defaults = UserDefaults.standard
+    //let defaults = UserDefaults.standard
     var loggedOnUserID:Int64 = 0
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

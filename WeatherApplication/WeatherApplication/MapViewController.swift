@@ -12,7 +12,7 @@ import CoreLocation
 
 class MapViewController: UIViewController, UISearchBarDelegate{
     
-    var defaults = UserDefaults()
+    //var defaults = UserDefaults()
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapTypeController: UISegmentedControl!
     
@@ -27,7 +27,7 @@ class MapViewController: UIViewController, UISearchBarDelegate{
         
         // Do any additional setup after loading the view.
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
-            defaults = delegate.defaults
+            //defaults = delegate.defaults
             userID = delegate.loggedOnUserID
             homelocation = DBManager.shared.showUserHomelocationBy(idInput: userID)
         }

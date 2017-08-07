@@ -23,7 +23,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     let speechSynthesizer = AVSpeechSynthesizer()
     
-    var defaults = UserDefaults()
+    //var defaults = UserDefaults()
     var userID:Int64 = 0
     
     let locationManager = CLLocationManager()
@@ -41,7 +41,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     func setupText(){
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
-            defaults = delegate.defaults
+            //defaults = delegate.defaults
             userID = delegate.loggedOnUserID
         }
         
@@ -189,7 +189,9 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 //print(city)
                 self.currentLocationLabel.setTitle(city, for: UIControlState.normal)
             }else {
-                let homelocationValue = self.defaults.string(forKey: "WeatherApp_homelocation")
+                //let homelocationValue = self.defaults.string(forKey: "WeatherApp_homelocation")
+                let homelocationValue = DBManager.shared.showUserHomelocationBy(idInput: self.userID)
+                
                 if homelocationValue != "" {
                     self.currentLocationLabel.setTitle(homelocationValue, for: UIControlState.normal)
                 }else{
