@@ -19,6 +19,7 @@ class MapViewController: UIViewController, UISearchBarDelegate{
     let regionRadius: CLLocationDistance = 1000
     var location = CLLocation()
     var lastSetLocation = CLLocation()
+    var homelocation = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,7 @@ class MapViewController: UIViewController, UISearchBarDelegate{
             defaults = delegate.defaults
         }
         centerMapOnLocation(location: location)
-
+        homelocation = defaults.string(forKey: "WeatherApp_homelocation") ?? ""
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,7 +84,20 @@ class MapViewController: UIViewController, UISearchBarDelegate{
         
         //create search request
         let searchRequest = MKLocalSearchRequest()
-        searchRequest.naturalLanguageQuery = searchBar.text
+        var query = searchBar.text?.lowercased()
+        if(query == "home"){
+            if (homelocation != ""){
+                query = homelocation
+                print("query: \(query ?? "nothing searching")")
+            }
+            else{
+                activityIndicator.stopAnimating()
+                UIApplication.shared.endIgnoringInteractionEvents()
+                self.showToast(message: "no results found")
+                return
+            }
+        }
+        searchRequest.naturalLanguageQuery = query
         
         let activeSearch = MKLocalSearch(request: searchRequest)
         activeSearch.start { (response, error) in
