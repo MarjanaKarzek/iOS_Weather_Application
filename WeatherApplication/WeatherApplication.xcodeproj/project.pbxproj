@@ -19,6 +19,8 @@
 		D6AA400C1F32180900F86545 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA400B1F32180900F86545 /* MainViewController.swift */; };
 		D6AA400E1F32182800F86545 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA400D1F32182800F86545 /* ProfileViewController.swift */; };
 		D6AA40101F32184600F86545 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA400F1F32184600F86545 /* MapViewController.swift */; };
+		D6CD61CE1F386EBB0002AF7B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD61CD1F386EBB0002AF7B /* LoginViewController.swift */; };
+		D6CD61D01F386F060002AF7B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD61CF1F386F060002AF7B /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		D6AA400B1F32180900F86545 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		D6AA400D1F32182800F86545 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D6AA400F1F32184600F86545 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		D6CD61CD1F386EBB0002AF7B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D6CD61CF1F386F060002AF7B /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,8 @@
 				D6AA400B1F32180900F86545 /* MainViewController.swift */,
 				D6AA3FDD1F320F6B00F86545 /* AppDelegate.swift */,
 				D6AA3FE11F320F6B00F86545 /* Main.storyboard */,
+				D6CD61CF1F386F060002AF7B /* SignUpViewController.swift */,
+				D6CD61CD1F386EBB0002AF7B /* LoginViewController.swift */,
 				D62FBC621F3220EE0032BA78 /* WeatherCollectionViewCell.swift */,
 				D6AA400F1F32184600F86545 /* MapViewController.swift */,
 				D6AA400D1F32182800F86545 /* ProfileViewController.swift */,
@@ -278,7 +284,9 @@
 				D69935771F346BC600DF99D7 /* WeatherReceiver.swift in Sources */,
 				D6AA400E1F32182800F86545 /* ProfileViewController.swift in Sources */,
 				D6AA3FDE1F320F6B00F86545 /* AppDelegate.swift in Sources */,
+				D6CD61CE1F386EBB0002AF7B /* LoginViewController.swift in Sources */,
 				D6AA400C1F32180900F86545 /* MainViewController.swift in Sources */,
+				D6CD61D01F386F060002AF7B /* SignUpViewController.swift in Sources */,
 				D69935751F3468DD00DF99D7 /* WeatherCard.swift in Sources */,
 				D6AA40101F32184600F86545 /* MapViewController.swift in Sources */,
 			);

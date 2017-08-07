@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A291j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6ju-OP-iNS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A291j" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rFI-FN-gg3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,79 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--Log In-->
+        <scene sceneID="G3m-cb-qyP">
+            <objects>
+                <viewController id="AfQ-bF-XUZ" customClass="LoginViewController" customModule="WeatherApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b0l-Fg-A5j"/>
+                        <viewControllerLayoutGuide type="bottom" id="dhf-aB-Kyi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dep-4V-ftu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sky-clouds-cloudy-weather" translatesAutoresizingMaskIntoConstraints="NO" id="So3-kg-pHN">
+                                <rect key="frame" x="0.0" y="64" width="375" height="602"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CmT-fZ-bIz">
+                                <rect key="frame" x="16" y="318" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Sign In">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="GMH-7R-QcU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2SM-M4-6DM">
+                                <rect key="frame" x="16" y="363" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ppc-hT-uUU" kind="show" id="Oke-qq-JwN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Log In" id="L6l-P3-0J5"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hv2-DJ-FmN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3006" y="-609"/>
+        </scene>
+        <!--Sign Up-->
+        <scene sceneID="Qz4-zZ-mk5">
+            <objects>
+                <viewController id="ppc-hT-uUU" customClass="SignUpViewController" customModule="WeatherApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cvm-qs-lSy"/>
+                        <viewControllerLayoutGuide type="bottom" id="Afb-Fh-478"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XO0-sn-EQf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sky-clouds-cloudy-weather" translatesAutoresizingMaskIntoConstraints="NO" id="6PS-k5-S7o">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Sign Up" id="p0U-47-HSy"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uYQ-9g-t2h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4001" y="-609"/>
+        </scene>
+        <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="WeatherApplication" customModuleProvider="target" sceneMemberID="viewController">
@@ -189,7 +261,7 @@
                             <constraint firstAttribute="trailing" secondItem="1Xp-3g-zZ0" secondAttribute="trailing" id="tn6-Ev-nOR"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="bft-LS-wg9">
+                    <navigationItem key="navigationItem" title="Home" id="bft-LS-wg9">
                         <barButtonItem key="rightBarButtonItem" id="CAU-4g-42C">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nL9-3Q-NI7">
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
@@ -211,7 +283,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1055.2" y="121.88905547226388"/>
+            <point key="canvasLocation" x="1049" y="154"/>
         </scene>
         <!--Profile-->
         <scene sceneID="IG3-rT-odw">
@@ -283,6 +355,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3HE-PG-nvQ">
+                                <rect key="frame" x="16" y="617" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Log Out">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <segue destination="AfQ-bF-XUZ" kind="show" identifier="showLogin" id="rqJ-fw-RQm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -333,7 +416,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nZg-PH-mLL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2005.5999999999999" y="123.68815592203899"/>
+            <point key="canvasLocation" x="1988" y="152.47376311844079"/>
         </scene>
         <!--Change Location-->
         <scene sceneID="pdn-gT-ueB">
@@ -421,29 +504,32 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2005.5999999999999" y="884.70764617691157"/>
+            <point key="canvasLocation" x="1988" y="914"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="A0v-uu-RKr">
+        <scene sceneID="2X3-CZ-Qlz">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6ju-OP-iNS" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rFI-FN-gg3" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IyA-kB-sDk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S2N-Ik-Mlo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="H5h-wD-Jo1"/>
+                        <segue destination="AfQ-bF-XUZ" kind="relationship" relationship="rootViewController" id="gpT-Q9-dK9"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RNF-qJ-QPp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lzP-VV-cbP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="111" y="124"/>
+            <point key="canvasLocation" x="1049" y="-608"/>
         </scene>
     </scenes>
     <resources>
         <image name="Image" width="225" height="225"/>
         <image name="sky-clouds-cloudy-weather" width="4272" height="2550"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="rqJ-fw-RQm"/>
+    </inferredMetricsTieBreakers>
 </document>

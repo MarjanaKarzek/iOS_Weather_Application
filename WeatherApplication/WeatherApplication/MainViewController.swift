@@ -187,6 +187,7 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewWillAppear(_ animated: Bool) {
         // Do any additional setup after loading the view.
+        navigationItem.hidesBackButton = true
         setupText()
     }
 
