@@ -43,7 +43,6 @@ class MapViewController: UIViewController, UISearchBarDelegate{
     }
     
     @IBAction func segmentChanged(_ sender: AnyObject){
-        print(mapTypeController.selectedSegmentIndex)
         switch mapTypeController.selectedSegmentIndex{
         case 0:
             mapView.mapType = MKMapType.standard
@@ -148,7 +147,6 @@ class MapViewController: UIViewController, UISearchBarDelegate{
         toast.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toast.textColor = UIColor.white
         toast.textAlignment = .center;
-        //toast.font = UIFont(name: "Montserrat-Light", size: 12.0)
         toast.text = message
         toast.alpha = 1.0
         toast.layer.cornerRadius = 10;

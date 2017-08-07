@@ -10,7 +10,6 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var homelocationField: UITextField!
     @IBOutlet weak var previewAmountField: UITextField!
@@ -18,6 +17,8 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
         if let delegate = UIApplication.shared.delegate as? AppDelegate {
             defaults = delegate.defaults
         }
@@ -34,8 +35,6 @@ class ProfileViewController: UIViewController {
         }else{
             previewAmountField.text = "10"
         }
-
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,18 +56,4 @@ class ProfileViewController: UIViewController {
             previewAmountField.text = "10"
         }
     }
-    
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
