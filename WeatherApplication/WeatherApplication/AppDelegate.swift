@@ -14,9 +14,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
     let defaults = UserDefaults.standard
+    var loggedOnUserID = 0
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        DBManager.shared.createUserTable()
         return true
     }
 

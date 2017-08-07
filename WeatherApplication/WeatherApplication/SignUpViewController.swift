@@ -10,6 +10,10 @@ import UIKit
 
 class SignUpViewController: UIViewController {
 
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var passwordCheckField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +25,14 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "showHome" {
+            return false
+        }
+        //DBManager.shared.
+        return true
+    }
+    
     /*
     // MARK: - Navigation
 

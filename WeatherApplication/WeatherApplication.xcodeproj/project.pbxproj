@@ -21,6 +21,8 @@
 		D6AA40101F32184600F86545 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AA400F1F32184600F86545 /* MapViewController.swift */; };
 		D6CD61CE1F386EBB0002AF7B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD61CD1F386EBB0002AF7B /* LoginViewController.swift */; };
 		D6CD61D01F386F060002AF7B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD61CF1F386F060002AF7B /* SignUpViewController.swift */; };
+		D6CD61D21F38797F0002AF7B /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD61D11F38797F0002AF7B /* DBManager.swift */; };
+		D6CD61F11F387F870002AF7B /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6CD61DE1F387E1C0002AF7B /* SQLite.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,55 @@
 			proxyType = 1;
 			remoteGlobalIDString = D6AA3FD91F320F6A00F86545;
 			remoteInfo = WeatherApplication;
+		};
+		D6CD61DD1F387E1C0002AF7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6CD61D31F387E1C0002AF7B /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EE247AD31C3F04ED00AE3E12;
+			remoteInfo = "SQLite iOS";
+		};
+		D6CD61DF1F387E1C0002AF7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6CD61D31F387E1C0002AF7B /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EE247ADD1C3F04ED00AE3E12;
+			remoteInfo = "SQLiteTests iOS";
+		};
+		D6CD61E11F387E1C0002AF7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6CD61D31F387E1C0002AF7B /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EE247B3C1C3F3ED000AE3E12;
+			remoteInfo = "SQLite Mac";
+		};
+		D6CD61E31F387E1C0002AF7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6CD61D31F387E1C0002AF7B /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EE247B451C3F3ED000AE3E12;
+			remoteInfo = "SQLiteTests Mac";
+		};
+		D6CD61E51F387E1C0002AF7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6CD61D31F387E1C0002AF7B /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 03A65E5A1C6BB0F50062603F;
+			remoteInfo = "SQLite tvOS";
+		};
+		D6CD61E71F387E1C0002AF7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6CD61D31F387E1C0002AF7B /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 03A65E631C6BB0F60062603F;
+			remoteInfo = "SQLiteTests tvOS";
+		};
+		D6CD61E91F387E1C0002AF7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D6CD61D31F387E1C0002AF7B /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A121AC451CA35C79005A31D1;
+			remoteInfo = "SQLite watchOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -61,6 +112,8 @@
 		D6AA400F1F32184600F86545 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D6CD61CD1F386EBB0002AF7B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D6CD61CF1F386F060002AF7B /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		D6CD61D11F38797F0002AF7B /* DBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBManager.swift; sourceTree = "<group>"; };
+		D6CD61D31F387E1C0002AF7B /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6CD61F11F387F870002AF7B /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +149,7 @@
 				D6AA3FF11F320F6B00F86545 /* WeatherApplicationTests */,
 				D6AA3FFC1F320F6B00F86545 /* WeatherApplicationUITests */,
 				D6AA3FDB1F320F6B00F86545 /* Products */,
+				D6CD61D31F387E1C0002AF7B /* SQLite.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,6 +179,7 @@
 				D6AA3FE91F320F6B00F86545 /* Info.plist */,
 				D69935741F3468DD00DF99D7 /* WeatherCard.swift */,
 				D69935761F346BC600DF99D7 /* WeatherReceiver.swift */,
+				D6CD61D11F38797F0002AF7B /* DBManager.swift */,
 			);
 			path = WeatherApplication;
 			sourceTree = "<group>";
@@ -144,6 +200,20 @@
 				D6AA3FFF1F320F6B00F86545 /* Info.plist */,
 			);
 			path = WeatherApplicationUITests;
+			sourceTree = "<group>";
+		};
+		D6CD61D41F387E1C0002AF7B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D6CD61DE1F387E1C0002AF7B /* SQLite.framework */,
+				D6CD61E01F387E1C0002AF7B /* SQLiteTests iOS.xctest */,
+				D6CD61E21F387E1C0002AF7B /* SQLite.framework */,
+				D6CD61E41F387E1C0002AF7B /* SQLiteTests Mac.xctest */,
+				D6CD61E61F387E1C0002AF7B /* SQLite.framework */,
+				D6CD61E81F387E1C0002AF7B /* SQLiteTests tvOS.xctest */,
+				D6CD61EA1F387E1C0002AF7B /* SQLite.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +309,12 @@
 			mainGroup = D6AA3FD11F320F6A00F86545;
 			productRefGroup = D6AA3FDB1F320F6B00F86545 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D6CD61D41F387E1C0002AF7B /* Products */;
+					ProjectRef = D6CD61D31F387E1C0002AF7B /* SQLite.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D6AA3FD91F320F6A00F86545 /* WeatherApplication */,
@@ -247,6 +323,58 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D6CD61DE1F387E1C0002AF7B /* SQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLite.framework;
+			remoteRef = D6CD61DD1F387E1C0002AF7B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D6CD61E01F387E1C0002AF7B /* SQLiteTests iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SQLiteTests iOS.xctest";
+			remoteRef = D6CD61DF1F387E1C0002AF7B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D6CD61E21F387E1C0002AF7B /* SQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLite.framework;
+			remoteRef = D6CD61E11F387E1C0002AF7B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D6CD61E41F387E1C0002AF7B /* SQLiteTests Mac.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SQLiteTests Mac.xctest";
+			remoteRef = D6CD61E31F387E1C0002AF7B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D6CD61E61F387E1C0002AF7B /* SQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLite.framework;
+			remoteRef = D6CD61E51F387E1C0002AF7B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D6CD61E81F387E1C0002AF7B /* SQLiteTests tvOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SQLiteTests tvOS.xctest";
+			remoteRef = D6CD61E71F387E1C0002AF7B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D6CD61EA1F387E1C0002AF7B /* SQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLite.framework;
+			remoteRef = D6CD61E91F387E1C0002AF7B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D6AA3FD81F320F6A00F86545 /* Resources */ = {
@@ -285,6 +413,7 @@
 				D6AA400E1F32182800F86545 /* ProfileViewController.swift in Sources */,
 				D6AA3FDE1F320F6B00F86545 /* AppDelegate.swift in Sources */,
 				D6CD61CE1F386EBB0002AF7B /* LoginViewController.swift in Sources */,
+				D6CD61D21F38797F0002AF7B /* DBManager.swift in Sources */,
 				D6AA400C1F32180900F86545 /* MainViewController.swift in Sources */,
 				D6CD61D01F386F060002AF7B /* SignUpViewController.swift in Sources */,
 				D69935751F3468DD00DF99D7 /* WeatherCard.swift in Sources */,
